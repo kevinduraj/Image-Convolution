@@ -22,20 +22,6 @@ public final class Reflection {
     }
 
     /*--------------------------------------------------------------------------------------------*/
-    public int[][] reflection(int img[][], int size) {
-
-        int gray[][] = new int[img.length + size * 2][img[0].length + size * 2];
-
-        for (int i = size; i < gray.length - size; ++i) {
-            for (int j = size; j < gray[i].length - size; ++j) {
-
-                gray[i][j] = img[i - size][j - size];
-            }
-        }
-        return gray;
-    }
-
-    /*--------------------------------------------------------------------------------------------*/
     public void displayBorder(int img[][]) {
 
         for (int i = 0; i < img.length; i++) {
@@ -99,25 +85,27 @@ public final class Reflection {
             }
         }        
         
-        //--- Top Left Corner ----//
-        for(int c=1, x=0; x<size; c++, x++) {
-                padded[x][x] = orig[size-c][size-c];
+        //--- Top Left Corner ---//
+        for(int i=0, oj=size-1; i<size; ++i, --oj) {
+            for(int j=0, oi=size-1; j<size; ++j, --oi) {
+                padded[i][j] = orig[oi][oj]; 
+            }
         }
         
         //---- Right Bottom Corner ---//
-        for(int c=size, x=nrow-1; x>=nrow-size; c--, x--) {
-                padded[x][x] = orig[rows-c][rows-c];
-        }
+        //for(int c=size, x=nrow-1; x>=nrow-size; c--, x--) {
+        //        padded[x][x] = orig[rows-c][rows-c];
+        //}
         
         //---- RightTop Corner ---//
-        for(int c=size, i=0, j=ncol-1; i<size; c--, i++, j--) {
-                padded[i][j] = orig[c-1][cols-c];
-        }
+        //for(int c=size, i=0, j=ncol-1; i<size; c--, i++, j--) {
+        //        padded[i][j] = orig[c-1][cols-c];
+        //}
         
         //---- Left Bottom Corner ---//
-        for(int c=size, i=nrow-1, j=0; j<size; c--, i--, j++) {
-                padded[i][j] = orig[rows-c][c-1];         
-        }
+        //for(int c=size, i=nrow-1, j=0; j<size; c--, i--, j++) {
+        //        padded[i][j] = orig[rows-c][c-1];         
+        //}
         
         return padded;
     }
