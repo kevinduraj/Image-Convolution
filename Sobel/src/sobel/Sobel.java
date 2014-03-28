@@ -7,7 +7,9 @@ import javax.imageio.ImageIO;
 
 public class Sobel {
 
-    /*--------------------------------------------------------------------------------------------*/
+    /*----------------------------------------------------------------------------------------------
+    TODO: Needs to be scaled 
+    ----------------------------------------------------------------------------------------------*/
     public String process(String filename) {
 
         int[][] img = ImageRead(filename);
@@ -16,7 +18,7 @@ public class Sobel {
 
         double[][] Gx = new double[rows][cols];
         double[][] Gy = new double[rows][cols];
-        double[][] G  = new double[rows][cols];
+        double[][] Mag  = new double[rows][cols];
         double[][] Dir  = new double[rows][cols];
 
         for (int i = 0; i < rows; i++) {
@@ -25,7 +27,7 @@ public class Sobel {
 
                 if (i == 0 || i == rows - 1 || j == 0 || j == cols - 1) {
 
-                    Gx[i][j] = Gy[i][j] = G[i][j] = 0; // Initialize
+                    Gx[i][j] = Gy[i][j] = Mag[i][j] = 0; // Initialize
 
                 } else {
 
@@ -35,9 +37,10 @@ public class Sobel {
                     Gy[i][j] = img[i-1][j+1] + 2 * img[i][j+1] + img[i+1][j+1]
                              - img[i-1][j-1] - 2 * img[i][j-1] - img[i+1][j-1];
 
-                    G[i][j] = Math.sqrt(Gx[i][j] * Gx[i][j] + Gy[i][j] * Gy[i][j]);  // Magnitude
+                    //--- Compute Magnitute and Direction ---//
+                    Mag[i][j] = Math.sqrt(Gx[i][j] * Gx[i][j] + Gy[i][j] * Gy[i][j]); // Magnitude
                     
-                    Dir[i][j] = Math.atan2(Gy[i][j],  Gx[i][j]);  // Direction                    
+                    Dir[i][j] = Math.atan2(Gy[i][j],  Gx[i][j]);                    // Direction                    
 
 
                 }
@@ -46,12 +49,10 @@ public class Sobel {
 
         } /*--- for (int i = 0; i < nrows; i++) ---*/
 
-        ImageWrite("src/image/Lenna_GX.png", Gx);
-        ImageWrite("src/image/Lenna_GY.png", Gy);
-        ImageWrite("src/image/Lenna_G.png", G);
+        ImageWrite("src/image/Lenna_Mag.png", Mag);
         ImageWrite("src/image/Lenna_Dir.png", Dir);
         
-        return "src/image/Lenna_G.png";
+        return "src/image/Lenna_Mag.png";
     }
     /*--------------------------------------------------------------------------------------------*/
 
