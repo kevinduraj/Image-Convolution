@@ -17,6 +17,7 @@ public class Sobel {
         double[][] Gx = new double[rows][cols];
         double[][] Gy = new double[rows][cols];
         double[][] G  = new double[rows][cols];
+        double[][] Dir  = new double[rows][cols];
 
         for (int i = 0; i < rows; i++) {
 
@@ -28,13 +29,16 @@ public class Sobel {
 
                 } else {
 
-                    Gx[i][j] = img[i + 1][j - 1] + 2 * img[i + 1][j] + img[i + 1][j + 1]
-                        - img[i - 1][j - 1] - 2 * img[i - 1][j] - img[i - 1][j + 1];
+                    Gx[i][j] = img[i+1][j-1] + 2 * img[i+1][j] + img[i+1][j+1]
+                             - img[i-1][j-1] - 2 * img[i-1][j] - img[i-1][j+1];
 
-                    Gy[i][j] = img[i - 1][j + 1] + 2 * img[i][j + 1] + img[i + 1][j + 1]
-                        - img[i - 1][j - 1] - 2 * img[i][j - 1] - img[i + 1][j - 1];
+                    Gy[i][j] = img[i-1][j+1] + 2 * img[i][j+1] + img[i+1][j+1]
+                             - img[i-1][j-1] - 2 * img[i][j-1] - img[i+1][j-1];
 
-                    G[i][j] = Math.abs(Gx[i][j]) + Math.abs(Gy[i][j]);
+                    G[i][j] = Math.sqrt(Gx[i][j] * Gx[i][j] + Gy[i][j] * Gy[i][j]);  // Magnitude
+                    
+                    Dir[i][j] = Math.atan2(Gy[i][j],  Gx[i][j]);  // Direction                    
+
 
                 }
 
@@ -45,6 +49,7 @@ public class Sobel {
         ImageWrite("src/image/Lenna_GX.png", Gx);
         ImageWrite("src/image/Lenna_GY.png", Gy);
         ImageWrite("src/image/Lenna_G.png", G);
+        ImageWrite("src/image/Lenna_Dir.png", Dir);
         
         return "src/image/Lenna_G.png";
     }
