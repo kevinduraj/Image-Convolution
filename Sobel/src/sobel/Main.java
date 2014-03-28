@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Main {
 
-    private static final String sInput = "src/image/Lenna.png";   
+    private static final String sInput = "src/image/reflection.png";   
     
     /*--------------------------------------------------------------------------------------------*/
     public static void main(String[] args) throws IOException {
