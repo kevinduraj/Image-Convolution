@@ -99,57 +99,26 @@ public final class Reflection {
             }
         }        
         
-
         //--- Top Left Corner ----//
-        //for (int i = 0; i < size; i++) { // vertical
-        //    for (int j=0; j<size; j++) { // horizontal
-        //        //padded[i][j] = horiz[i - size][rows - c];
-        //        padded[i][j] = 1;
-        //    }
-        //}
-        //--- Right Side ----//
-        //for (int i = size; i < cols + size; i++) { // vertical
-        //    for (int c=0, j=ncol-size-1; j < ncol; c++, j++) { // horizontal
-        //        //img[i][j] = horiz[i-half][c];
-        //        padded[i][j] = 2;
-        //    }
-        //}
-        //--- Top Side ---//
-        //for (int i = 0; i < size; i++) { // vertical
-        //    for (int j = size; j < rows + size; j++) { // horizontal
-        //        //img[i][j] = vert[(width1 - half) + i][j - half];
-        //        padded[i][j] = 3;
-        //    }
-        //}
-        /*        //--- Bottom Side ----//
-         for (int i = nrow-size-1; i < nrow; i++) { // vertical
-         for (int j = size; j < rows+size; j++) { // horizontal
-         //img[i][half + j] = vert[i - (height2 - half-1)][j];
-         padded[i][j] = 4;
-         }
-         }
+        for(int c=1, x=0; x<size; c++, x++) {
+                padded[x][x] = orig[size-c][size-c];
+        }
         
-         //---- Top Left Corner ----//
-         for(int c=1, x=0; x<size; c++, x++) {
-         //padded[x][x] = orig[size-c][size-c];
-         //img[x][x] = 5;
-         }
+        //---- Right Bottom Corner ---//
+        for(int c=size, x=nrow-1; x>=nrow-size; c--, x--) {
+                padded[x][x] = orig[rows-c][rows-c];
+        }
         
-         //---- Bottom Right Corner ---//
-         for(int c=size, x=nrow; x>=nrow-size; c--, x--) {
-         //padded[x-1][x-1] = rotate[c][c];
-         }
+        //---- RightTop Corner ---//
+        for(int c=size, i=0, j=ncol-1; i<size; c--, i++, j--) {
+                padded[i][j] = orig[c-1][cols-c];
+        }
         
-         //---- Top Right Corner ---//
-         for(int c=size, i=0, j=ncol-1; i<=size; c--, i++, j--) {
-         //img[i][j] = src[c-1][width1-c];
-         //padded[i][j] = horiz[c+1][c];
-         }
+        //---- Left Bottom Corner ---//
+        for(int c=size, i=nrow-1, j=0; j<size; c--, i--, j++) {
+                padded[i][j] = orig[rows-c][c-1];         
+        }
         
-         //---- Left Bottom Corner ---//
-         for(int c=size, i=nrow-1, j=0; j<size; c--, i--, j++) {
-         //padded[i][j] = orig[cols-c][c-1+1];
-         }*/
         return padded;
     }
     /*--------------------------------------------------------------------------------------------*/

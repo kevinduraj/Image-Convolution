@@ -16,27 +16,40 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
        
+        input = "src/image/Test.png";
+        CreateTestImage(input);
         Padding padding = new Padding();
         int[][] out = padding.add(input, size);   
-        ImageWrite(out, "src/image/padded.png");                
-        Reflection(size);
+        ImageWrite(out, "src/image/padded.png"); 
+        int[][] finalImage = Reflection(size);
+        ImageDisplay(finalImage);
         
         
         
     }
     /*--------------------------------------------------------------------------------------------*/
 
-    private static void Reflection(int size) throws IOException {
+    private static int[][] Reflection(int size) throws IOException {
 
         Reflection ref = new Reflection(input);
         int[][] orig = ref.ImageRead(input);        
-        int[][] padded = ref.ImageRead(border);        
-        int[][] vert = ref.ImageRead("src/image/vertical.png");       
+        int[][] padded = ref.ImageRead(border); 
+        
+        int[][] vert = ref.ImageRead("src/image/vertical.png"); 
+        System.out.println("Vertical");
+        ImageDisplay(vert);
+        
         int[][] horiz = ref.ImageRead("src/image/horizontal.png");
+        System.out.println("Horizontal");
+        ImageDisplay(horiz);
+
         int[][] rotate = ref.ImageRead("src/image/rotate180.png");
+        System.out.println("Rotate");
+        ImageDisplay(rotate);
 
         padded = ref.reflection(padded, orig, vert, horiz, rotate, size);
         ImageWrite(padded, output);
+        return padded;
         
     }
     /*--------------------------------------------------------------------------------------------*/
