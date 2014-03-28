@@ -8,9 +8,9 @@ import javax.imageio.ImageIO;
 public class Sobel {
 
     /*----------------------------------------------------------------------------------------------
-    TODO: Needs to be scaled 
-    ----------------------------------------------------------------------------------------------*/
-    public String process(String filename) {
+     TODO: Needs to be scaled 
+     ----------------------------------------------------------------------------------------------*/
+    public void process(String filename) {
 
         int[][] img = ImageRead(filename);
         int rows = img.length;
@@ -18,8 +18,8 @@ public class Sobel {
 
         double[][] Gx = new double[rows][cols];
         double[][] Gy = new double[rows][cols];
-        double[][] Mag  = new double[rows][cols];
-        double[][] Dir  = new double[rows][cols];
+        double[][] Mag = new double[rows][cols];
+        double[][] Dir = new double[rows][cols];
 
         for (int i = 0; i < rows; i++) {
 
@@ -31,17 +31,16 @@ public class Sobel {
 
                 } else {
 
-                    Gx[i][j] = img[i+1][j-1] + 2 * img[i+1][j] + img[i+1][j+1]
-                             - img[i-1][j-1] - 2 * img[i-1][j] - img[i-1][j+1];
+                    Gx[i][j] = img[i + 1][j - 1] + 2 * img[i + 1][j] + img[i + 1][j + 1]
+                            - img[i - 1][j - 1] - 2 * img[i - 1][j] - img[i - 1][j + 1];
 
-                    Gy[i][j] = img[i-1][j+1] + 2 * img[i][j+1] + img[i+1][j+1]
-                             - img[i-1][j-1] - 2 * img[i][j-1] - img[i+1][j-1];
+                    Gy[i][j] = img[i - 1][j + 1] + 2 * img[i][j + 1] + img[i + 1][j + 1]
+                            - img[i - 1][j - 1] - 2 * img[i][j - 1] - img[i + 1][j - 1];
 
                     //--- Compute Magnitute and Direction ---//
                     Mag[i][j] = Math.sqrt(Gx[i][j] * Gx[i][j] + Gy[i][j] * Gy[i][j]); // Magnitude
-                    
-                    Dir[i][j] = Math.atan2(Gy[i][j],  Gx[i][j]);                    // Direction                    
 
+                    Dir[i][j] = Math.atan2(Gy[i][j], Gx[i][j]);                      // Direction
 
                 }
 
@@ -49,11 +48,45 @@ public class Sobel {
 
         } /*--- for (int i = 0; i < nrows; i++) ---*/
 
-        ImageWrite("src/image/Lenna_Mag.png", Mag);
-        ImageWrite("src/image/Lenna_Dir.png", Dir);
+        double[][] magScaled = ScaleMagnitude(Mag);
+        ImageWrite("src/image/Lenna_Mag.png", magScaled);
         
-        return "src/image/Lenna_Mag.png";
+        double[][] dirScaled = ScaledDirection(Dir);
+        ImageWrite("src/image/Lenna_Dir.png", dirScaled);
+
     }
+    /*--------------------------------------------------------------------------------------------
+      Scale Magnitute result prior to writting to a file     
+      sqrt ( pow2( 1024 ) + pow2(1024) ) = 1448.154687
+    /*--------------------------------------------------------------------------------------------*/
+
+    private double[][] ScaleMagnitude(double[][] Mag) {
+        
+        double[][] mag = new double[Mag.length][Mag[0].length];
+        for (int i = 0; i < Mag.length; i++) {
+            for (int j = 0; j < Mag[i].length; j++) {
+                    mag[i][j] = (Mag[i][j] * 255) / 1448.154687;
+            }
+        }
+        return mag;
+    }
+    /*--------------------------------------------------------------------------------------------
+      Scale Direction result prior to writting to a file             
+      pi = 3.1415926
+      2 * pi = 6.2831853
+    /*--------------------------------------------------------------------------------------------*/
+
+    private double[][] ScaledDirection(double[][] Dir) {
+        
+        double[][] dir = new double[Dir.length][Dir[0].length];
+        for (int i = 0; i < Dir.length; i++) {
+            for (int j = 0; j < Dir[i].length; j++) {
+                    dir[i][j] = ((Dir[i][j] + 3.1415926) / 6.2831853) * 255;
+            }
+        }
+        return dir;
+    }
+    
     /*--------------------------------------------------------------------------------------------*/
 
     private int[][] ImageRead(String filename) {
