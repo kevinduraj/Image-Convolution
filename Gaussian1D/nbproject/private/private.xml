@@ -5,6 +5,8 @@
         <group name="Convolution">
             <file>file:/C:/cygwin/home/durajkt/github/Convolution/Gaussian1D/src/gaussian/Main.java</file>
         </group>
-        <group name="Image-Convolution"/>
+        <group name="Image-Convolution">
+            <file>file:/C:/cygwin/home/durajkt/github/Image-Convolution/Gaussian1D/src/gaussian/Main.java</file>
+        </group>
     </open-files>
 </project-private>
