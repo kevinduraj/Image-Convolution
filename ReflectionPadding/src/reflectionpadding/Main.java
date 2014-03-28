@@ -9,20 +9,20 @@ public class Main {
 
     private static String input = "src/image/Lenna.png";
     private static String border = "src/image/Padded.png";
-    private static String output = "src/image2/reflection.png";
+    private static String output = "C:\\Users\\durajkt\\Desktop\\Assign3b\\reflection.png";
     private static int size = 7;
             
     /*--------------------------------------------------------------------------------------------*/
 
     public static void main(String[] args) throws IOException {
        
-        input = "src/image/Test.png";
-        CreateTestImage(input);
+        //input = "src/image/Test.png";
+        //CreateTestImage(input);
         Padding padding = new Padding();
         int[][] out = padding.add(input, size);   
         ImageWrite(out, "src/image/padded.png"); 
         int[][] finalImage = Reflection(size);
-        ImageDisplay(finalImage);
+        //ImageDisplay(finalImage);
         
         
         
@@ -36,16 +36,16 @@ public class Main {
         int[][] padded = ref.ImageRead(border); 
         
         int[][] vert = ref.ImageRead("src/image/vertical.png"); 
-        System.out.println("Vertical");
-        ImageDisplay(vert);
+        //System.out.println("Vertical");
+        //ImageDisplay(vert);
         
         int[][] horiz = ref.ImageRead("src/image/horizontal.png");
-        System.out.println("Horizontal");
-        ImageDisplay(horiz);
+        //System.out.println("Horizontal");
+        //ImageDisplay(horiz);
 
         int[][] rotate = ref.ImageRead("src/image/rotate180.png");
-        System.out.println("Rotate");
-        ImageDisplay(rotate);
+        //System.out.println("Rotate");
+        //ImageDisplay(rotate);
 
         padded = ref.reflection(padded, orig, vert, horiz, rotate, size);
         ImageWrite(padded, output);
@@ -89,6 +89,7 @@ public class Main {
             }
 
             File outputfile = new File(filename);
+            //File outputfile = new File(System.getProperty("user.home"), "Desktop");
             ImageIO.write(bi, "png", outputfile);
         } catch (IOException e) {
             System.out.println(e);
