@@ -5,8 +5,6 @@
         <group name="Convolution">
             <file>file:/C:/cygwin/home/durajkt/github/Convolution/Sobel/src/sobel/Main.java</file>
         </group>
-        <group name="Image-Convolution">
-            <file>file:/C:/cygwin/home/durajkt/github/Image-Convolution/Sobel/src/sobel/Main.java</file>
-        </group>
+        <group name="Image-Convolution"/>
     </open-files>
 </project-private>

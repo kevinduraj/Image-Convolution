@@ -6,6 +6,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Sobel {
+    
+    public double[][] Magnitute;
+    public double[][] Direction;
 
     /*----------------------------------------------------------------------------------------------
      TODO: Needs to be scaled 
@@ -48,11 +51,9 @@ public class Sobel {
 
         } /*--- for (int i = 0; i < nrows; i++) ---*/
 
-        double[][] magScaled = ScaleMagnitude(Mag);
-        ImageWrite("src/image/Lenna_Mag.png", magScaled);
+        Magnitute = ScaleMagnitude(Mag);
         
-        double[][] dirScaled = ScaledDirection(Dir);
-        ImageWrite("src/image/Lenna_Dir.png", dirScaled);
+        Direction = ScaledDirection(Dir);
 
     }
     /*--------------------------------------------------------------------------------------------
