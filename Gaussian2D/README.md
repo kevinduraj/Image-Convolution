@@ -1,3 +1,6 @@
+Gaussian Blur 2D
+================
+
 * Read an image file (PNG format file will be supplied)
 * Separate the image into three components (red-green-blue)
 * Perform a blurring operation utilizing a 2D Gaussian kernel
