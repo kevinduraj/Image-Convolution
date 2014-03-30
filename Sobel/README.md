@@ -2,7 +2,9 @@ Sobel
 =====
 
 * Read an image file (PNG format file will be supplied)
+
 * Separate the image into three components (red-green-blue)
+
 * Perform an edged detection operation on the green component using the Sobel gradient operator
 
 * Use this formula to scale your magnitude result prior to writing to a file
