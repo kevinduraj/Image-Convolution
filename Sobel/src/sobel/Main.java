@@ -10,8 +10,8 @@ public class Main {
     private static final String sInput = "src/image/Lenna.png"; 
     private static final String sReflect = "src/image/Reflection.png"; 
     
-    private static final int padding_x = 15;
-    private static final int padding_y = 15;
+    private static final int padding_x = 15; // x must be odd integer
+    private static final int padding_y = 15; // y must be odd integer
     
     /*--------------------------------------------------------------------------------------------*/
     public static void main(String[] args) throws IOException {
@@ -20,7 +20,7 @@ public class Main {
         int[][] iimage = ImageRead(sInput);
         Reflection ref = new Reflection();
         
-        int[][] oimage = ref.conv(iimage, padding_x, padding_y);  // must be odd number
+        int[][] oimage = ref.conv(iimage, padding_x, padding_y);  
         ImageWrite(oimage, sReflect);
         
         
