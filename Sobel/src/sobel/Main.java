@@ -34,7 +34,7 @@ public class Main {
         
         /* Statistics */
         Statistics stat1 = new Statistics("src/image/Lenna_Mag.png");
-        System.out.println("\n\n" + "src/image/Lenna_Mag.png");
+        System.out.println("\n" + "src/image/Lenna_Mag.png");
         System.out.format("Mean     : %.3f\n\n", + stat1.getMean());
 
         /*----------------------- Sobel Direction -----------------------------*/
@@ -43,7 +43,7 @@ public class Main {
         
         /* Statistics */
         Statistics stat2 = new Statistics("src/image/Lenna_Dir.png");
-        System.out.println("\n\n" + "src/image/Lenna_Dir.png");
+        System.out.println("\n" + "src/image/Lenna_Dir.png");
         System.out.format("Mean     : %.3f\n\n", + stat2.getMean());
                 
         
