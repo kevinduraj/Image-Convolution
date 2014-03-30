@@ -1,5 +1,5 @@
-Sobel
-=====
+Sobel Edge Detector
+===================
 
 * Read an image file (PNG format file will be supplied)
 
